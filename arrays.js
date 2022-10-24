@@ -67,25 +67,6 @@
 
 
 
-// строки чуть подробнее
-// .length - длина перебираемого значения (строки, массива)
-// [0]-индексы
-// console.log(
-// 	'HeLlo'.length,
-// 	'HeLlo'[0],
-// 	'HeLlo'[1],
-// 	'HeLlo'[2],
-// 	'HeLlo'[3],
-// 	'HeLlo'[4],
-// )
-// let hello = 'Hello, World';
-// let helloLength = hello.length;
-// let helloUpperCase = hello.toUpperCase();
-// let index4Upper = hello[4].toUpperCase();
-
-// hello.toLowerCase()
-// .toLowerCase();
-// .toUpperCase();
 
 
 
@@ -452,23 +433,30 @@
 
 
 // let arr = ["Я", "изучаю", "JavaScript"];
+// console.log( arr );
 // arr.splice(1, 1); // начиная с позиции 1, удалить 1 элемент
 // console.log( arr ); // осталось ["Я", "JavaScript"]
 
 
 
 // let arr = ["Я", "изучаю", "JavaScript", "прямо", "сейчас"];
-// // удалить 3 первых элемента и заменить их другими
-// arr.splice(0, 3, "Давай", "танцевать");
-// console.log( arr ) // теперь ["Давай", "танцевать", "прямо", "сейчас"]
+// // // удалить 3 первых элемента и заменить их другими
+// console.log( arr );
+// let deletedElemnts = arr.splice(0, 3, "Давай", "танцевать");
+// // 1 аргумент - индекс элемента с которого удаляем
+// // 2 аргумент - количество удаляеммых элементов
+// // 3,4,5... аргументы чем заменяем
+// // удаленные элементы можно сохранить как return метода
 
+// console.log( arr ); // теперь ["Давай", "танцевать", "прямо", "сейчас"]
+// console.log( deletedElemnts );
 
 
 
 // let arr = ["Я", "изучаю", "JavaScript", "прямо", "сейчас"];
 // // удалить 2 первых элемента
 // let removed = arr.splice(0, 2);
-// console.log( removed ); // "Я", "изучаю" <-- массив из удалённых элементов
+// console.log( removed ); // ["Я", "изучаю"] <-- массив из удалённых элементов
 
 
 
@@ -477,12 +465,14 @@
 // для этого достаточно установить deleteCount в 0:
 
 // let arr = ["Я", "изучаю", "JavaScript"];
-// // с позиции 2
-// // удалить 0 элементов
-// // вставить "сложный", "язык"
+// // // с позиции 2
+// // // удалить 0 элементов
+// // // вставить "сложный", "язык"
 // arr.splice(2, 0, "сложный", "язык");
-
-// console.log( arr ); // "Я", "изучаю", "сложный", "язык", "JavaScript"
+// function spliceClone(position, count, ...rest) {
+// 	// body...
+// }
+// console.log( arr ); // ["Я", "изучаю", "сложный", "язык", "JavaScript"]
 
 
 
@@ -501,9 +491,9 @@
 
 // let arr = ["t", "e", "s", "t"];
 // let arr2 = arr.slice(1, 3); // e,s (копирует с 1 до 3)
-// let arr3 = arr.slice(-2); // s,t (копирует с -2 до конца)
-
-
+// // let arr3 = arr.slice(-2); // s,t (копирует с -2 до конца)
+// console.log(arr);
+// console.log(arr2);
 
 
 
@@ -511,8 +501,6 @@
 // let arrClone = arr.slice() // создаёт копию массива arr
 // Это часто используют, чтобы создать копию массива для дальнейших преобразований, 
 // которые не должны менять исходный массив.
-
-
 
 
 
@@ -532,6 +520,14 @@
 // так и простыми значениями.
 
 // let arr = [1, 2];
+// let arr2 = [3, 4];
+// let arr3 = [15, 26];
+// let concatArrays = arr.concat(arr2, arr3);
+
+// console.log(concatArrays);
+// console.log(arr);
+// console.log(arr2);
+// console.log(arr3);
 // // // создать массив из: arr и [3,4]
 // console.log( arr.concat([3, 4]) ); // [1,2,3,4]
 // // // создать массив из: arr и [3,4] и [5,6]
@@ -542,6 +538,32 @@
 
 
 
+
+
+
+
+// let string = 'test';
+// let arr = string.split(""); // ['t','e','s','t'];
+// let comebackString = arr.join(" ^___^ ");
+// console.log(comebackString);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// ==============================
 
 
 
@@ -565,10 +587,10 @@
 
 // Например, этот код выведет на экран каждый элемент массива:
 // Вызов console.log для каждого элемента
+
 // ["Bilbo", "Gandalf", "Nazgul"].forEach(
 // 	(item, index, array) => {
 // 	  console.log(`${item} имеет позицию ${index} в ${array}`);
-// 	  console.log(array);
 // 	}
 // );
 
@@ -607,6 +629,8 @@
 
 // Здесь пригодится метод arr.find.
 // Его синтаксис таков:
+
+
 // let result = arr.find(
 // 		function(item, index, array) {
 // 	  // если true - возвращается текущий элемент и перебор прерывается
@@ -633,11 +657,19 @@
 // ];
 
 
-// let user = users.find(item => item[0] == 'Агранова');
+// let user = users.find(
+// 	(item, i ) => i == 1 // if true return item
+// )[0]; // стрелочный
 
-// console.log(user); // 
+// let user2 = users.find(
+// 	function(item) {
+// 		return item[0] == 'Петров' // if true return item
+// 	} // декларативный
+// );
 
 
+// console.log(user); // ['Агранова', "Соня"]
+// console.log(user2);
 
 
 
@@ -649,22 +681,33 @@
 // Синтаксис этого метода схож с find, но 
 // filter возвращает массив из всех подходящих элементов
 
-// let results = arr.filter(function(item, index, array) {
+// let results = arr.filter( // results = [...]
+// 	function(item, index, array) {
 //   // если true - элемент добавляется к результату, и перебор продолжается
 //   // возвращается пустой массив в случае, если ничего не найдено
-// });
+// 	}
+// );
 
 
 // let users = [
 //   ['Иванов', "Вася"],
-//   ['Агранова', "Петя"],
+//   ['Агранов', "Петя"],
 //   ['Агранова', "Маша"],
 // ];
 
-// // // возвращает массив, состоящий из двух первых пользователей
-// let someUsers = users.filter(item => item[0] === 'Агранова');
+// let checkFunc = function(item,i,array) {
+// 	return item[0][0] === 'А'
+// }
 
-// console.log(someUsers); //
+// let someUsers = users.filter(
+// 	item => item[0][0] === 'А'
+// );
+
+// let someUsers2 = users.filter( // соберет в массив items
+// 	checkFunc // описание функции, или анонимная функция прямо здесь
+// ); // аргументом является callback function
+
+// console.log(someUsers);
 
 
 
@@ -681,15 +724,37 @@
 // и возвращает массив результатов выполнения этой функции.
 
 // Синтаксис:
-// let result = arr.map(function(item, index, array) {
-//   // возвращается новое значение вместо элемента
-// });
+// let result = arr.map(
+// 	function(item, index, array) {
+//   	// возвращается новое значение вместо элемента
+// 	}
+// );
 // Например, здесь мы преобразуем каждый элемент в его длину:
-// let lengths = ["Bilbo", "Gandalf", "Nazgul"].map(item => item.length);
+
+
+// let lengths = ["Bilbo", "Gandalf", "Nazgul"].map(
+// 	item => item.length
+// );
+
+
+// let lengths2 = ["Bilbo", "Gandalf", "Nazgul"].map(
+// 	function(item) {
+// 		if (item === "Gandalf") {
+// 			return item.toUpperCase()
+// 		}
+// 		return item
+		
+// 	}
+// );
+// console.log(lengths2)
+
+
+
+
 
 // let arr = ["Bilbo", "Gandalf", "Nazgul"];
 
-// let arrMapping = arr.map(
+// let changeNasgulToHobbit = arr.map( // ["Bilbo", "Gandalf", "Hobbit"]
 // 	function(item) {
 // 		if (item === "Nazgul") {
 // 			return "Hobbit"
@@ -706,6 +771,14 @@
 
 
 
+
+
+
+// let numbers = [5,4,7,12,78,457,2,5];
+// let numbersFiveToSquere = numbers.map(
+// 	item => item === 5 ? item*item : item
+// )
+// console.log(numbersFiveToSquere)
 
 
 
@@ -746,7 +819,7 @@
 
 // Например:
 // let arr = ['Вася', 'Петя', 'Маша'];
-// let str = arr.join(' '); // объединить массив в строку через ;
+// let str = arr.join(';'); // объединить массив в строку через ; 
 
 // console.log( str ); // Вася;Петя;Маша
 
@@ -793,10 +866,16 @@
 // split/join – преобразует строку в массив и обратно.
 // reduce(func, initial) – вычисляет одно значение на основе всего массива, вызывая func для каждого элемента и передавая промежуточный результат между вызовами.
 
+
+
 // Дополнительно:
-// Array.isArray(arr) проверяет, является ли arr массивом.
+// Array.isArray(arrBlablabla); // проверяет, является ли arr массивом.
 
 
+
+// Главное это сейчас 
+// find/filter 
+// forEach/map
 
 
 
@@ -807,9 +886,15 @@
 
 
 // синтаксис для массива:
-// let [item1 = default, item2, ...rest] = array
 
+let catArray = ['Кошачий корм', 'www.corm.ua', 600, 'дополнительные данные', 'не всегда нужные данные']
 
+let [header, link, price, ...restData] = catArray;
+
+console.log(header);
+console.log(link);
+console.log(price);
+console.log(restData);
 // Первый элемент отправляется в item1; 
 // второй отправляется в item2, 
 // все остальные элементы попадают в массив rest.
