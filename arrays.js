@@ -599,10 +599,6 @@
 
 
 
-
-
-
-
 // includes - Поиск в массиве
 // arr.includes(item, from) – ищет item, начиная с индекса from, 
 // и возвращает true, если поиск успешен.
@@ -657,6 +653,17 @@
 // ];
 
 
+
+// let user = users.find(
+// 	function(item, index) {
+// 		return item[0] === 'Агранова' // ['Агранова', "Соня"] - сохранится в user
+// 	} // как только callback вернет true текущая итерация сохранится в переменную
+// );
+
+
+
+
+
 // let user = users.find(
 // 	(item, i ) => i == 1 // if true return item
 // )[0]; // стрелочный
@@ -690,18 +697,34 @@
 
 
 // let users = [
-//   ['Иванов', "Вася"],
-//   ['Агранов', "Петя"],
-//   ['Агранова', "Маша"],
+//   ['Иванов', "Вася"], // 0
+//   ['Агранов', "Петя"], // 1
+//   ['Агранова', "Маша"], // 2
 // ];
 
-// let checkFunc = function(item,i,array) {
+// let checkFunc = function(item, i, array) {
 // 	return item[0][0] === 'А'
 // }
 
+
+// let users = [
+//   "Вася", // 0
+//   'Петя', // 1
+//   "Маша", // 2
+// ];
+
 // let someUsers = users.filter(
-// 	item => item[0][0] === 'А'
+// 	item => item[3] === 'я'
 // );
+
+// let someUsers2 = users.filter(
+// 	function(item) {
+// 		return item[3] === 'я'
+// 	}
+// );
+
+// console.log(someUsers,someUsers2);
+
 
 // let someUsers2 = users.filter( // соберет в массив items
 // 	checkFunc // описание функции, или анонимная функция прямо здесь
@@ -887,14 +910,23 @@
 
 // синтаксис для массива:
 
-let catArray = ['Кошачий корм', 'www.corm.ua', 600, 'дополнительные данные', 'не всегда нужные данные']
+// let catArray = [
+// 	'Кошачий корм', 
+// 	'www.corm.ua', 
+// 	600, 
+// 	'дополнительные данные', 
+// 	'не всегда нужные данные'
+// ]
 
-let [header, link, price, ...restData] = catArray;
+// let [header, link, price, ...restData] = catArray;
 
-console.log(header);
-console.log(link);
-console.log(price);
-console.log(restData);
+// console.log(restData);
+// console.log(...restData);
+
+// console.log(header);
+// console.log(link);
+// console.log(price);
+// console.log(restData);
 // Первый элемент отправляется в item1; 
 // второй отправляется в item2, 
 // все остальные элементы попадают в массив rest.
@@ -938,6 +970,30 @@ console.log(restData);
 // console.log(rest[0]); // Consul
 // console.log(rest[1]); // of the Roman Republic
 // console.log(rest.length); // 2
+
+
+
+
+
+// function withOutArray(array, ...deleteData) {
+// 	console.log(deleteData)
+// }
+
+
+
+// let someArray = ['ttt', 'fff', 555, true, false, undefined, null, 0, 5, 61, 1];
+// withOutArray(someArray, null, 5, 1, false, 555);
+
+
+
+
+
+
+
+
+
+
+
 
 
 
