@@ -1,24 +1,84 @@
+// let someArray = [1, 4, 3, 2, 5, 6, 7] // arr.length = 7
+
+// function filterRangeInPlace(arr, a,b) { // arr мы изменяем исходный
+//     for (let i = 0; i < arr.length; i++) { // 1. перебор массива
+//         if (arr[i] < a || arr[i] > b) { // условие выхода из диапазона
+//             arr.splice(i,1);
+//             i--;
+//         }
+//     }
+// }
+
+
+// console.log(someArray);
+// filterRangeInPlace(someArray, 1,4);
+// console.log(someArray);
+
+
+
+
+// let someArray = ["Вввв","Ffff"];
+// let someArray2 = [...someArray];
+// console.log(
+// 	...someArray
+// )
+
+// function someFun(
+// 	importantArg1,
+// 	importantArg2,
+// 	...rest
+// 	) {
+// 	console.log(importantArg1)
+// 	console.log(importantArg2)
+
+// 	if (importantArg2 === 35) {
+// 		console.log(rest)
+// 		rest.forEach(
+// 			item => console.log(item)
+// 		)
+// 	}
+// }
+
+// someFun('Tjaša', 35, 'fdfd')
+
+
+// const [name, age, ...rest] = ['Tjaša', 35, 'fdfd', 4545, false];
+// console.log( name, age );
+// console.log( rest );
+
+
+
+
+
+
+
+
+
 // Пустой объект («пустой ящик») можно создать, 
 // используя один из двух вариантов синтаксиса:
 
 // let user = new Object(); // синтаксис "конструктор объекта"
-// let user = {};  // синтаксис "литерал объекта"
+// let user = {}; // синтаксис "литерал объекта"
 
 
 // Литералы и свойства
 // let user = {     // объект
 //   name: "John",  // под ключом "name" хранится значение "John"
-//   age: 30        // под ключом "age" хранится значение 30
+//   age: 30,     // под ключом "age" хранится значение 30
 // };
 
-// // // получаем свойства объекта:
+// // // // получаем значение из свойства объекта:
 // console.log( user.name ); // John
 // console.log( user.age ); // 30
+// // через точку по ключу
 
-// user.isAdmin = true; // добавим свойство с логическим значением:
-// console.log( user );
+
+
+// console.log( user ); // исходный объект {name: 'John', age: 30}
+// user.isAdmin = true; // добавим свойство с логическим значением
+// console.log( user ); // c новым свойством isAdmin {name: 'John', age: 30, isAdmin: true}
 // delete user.age; // удаление свойства
-// console.log( user );
+// console.log( user ); // без свойства age {name: 'John', isAdmin: true}
 
 
 
@@ -32,10 +92,19 @@
 //   name: "John"
 // };
 // user.name = "Pete"; // (*)
-// // console.log(user.name); // Pete
-// // console.log(user["name"]); // Pete - можно обратится и не через точку
+// console.log(user.name); // Pete
 
-// let userKey = "user";
+// console.log(user["name"]); // Pete - можно обратится и не через точку
+
+
+
+// const user = {
+//   name: "John",
+//   age: 25
+// };
+// let userKey = "age";
+// console.log(user)
+
 // console.log( user[userKey] ); // Pete - и через переменную соотвественно
 // console.log(user)
 // user = { // а вот это уже вызовет ошибку
@@ -48,14 +117,20 @@
 
 
 
+
+
+
+
+
+
 // // так же к ключам тоже можно задавать через квадратные скобки
 // let fruit = "apple";
 
-// let bagForFruits = {
+// let bag = {
 //   [fruit]: 5, // имя свойства будет взято из переменной fruit
 // };
 
-// // console.log(bagForFruits)
+// console.log(bag)
 // console.log( bag.apple ); // 5
 // console.log( bag["apple"] ); // 5
 // console.log( bag[fruit] ); // 5
@@ -155,10 +230,10 @@
 
 // обращение к несуществующему свойству
 // let user = {
-// 	age:25
+// 	age: 25
 // };
-// console.log( user.noSuchProperty ); // true означает "свойства нет"
-
+// console.log( user.noSuchProperty === undefined ); // true значит свойства нет
+// console.log(user)
 
 
 
@@ -179,7 +254,8 @@
 // 	age: 30 
 // };
 
-// console.log( "age" in user ); // true, user.age существует
+// let userKey = "age";
+// console.log( userKey in user ); // true, user.age существует
 // console.log( "blabla" in user ); // false, user.blabla не существует
 
 
@@ -232,16 +308,21 @@
 //   isAdmin: true
 // };
 
-// for (let key in user) {
+// for (let someKey in user) { // пока есть ключи в объекте
 //   // ключи
-//   console.log( key );  // name, age, isAdmin
+//   console.log( someKey );  // "name", "age", "isAdmin"
 //   // значения ключей
-//   console.log( user[key] ); // John, 30, true
+//   console.log( user[someKey] ); // John, 30, true
 // }
 
 
+
+
+
+
+
 // Все конструкции «for» позволяют нам объявлять 
-// переменную внутри цикла, как, например, let key здесь.
+// переменную внутри цикла, как, например, let someKey здесь.
 
 // Кроме того, мы могли бы использовать другое имя переменной. 
 // Например, часто используется вариант "for (let prop in obj)".
@@ -263,7 +344,7 @@
 
 // Они хранят свойства (пары ключ-значение), где:
 
-// Ключи свойств должны быть строками или символами (обычно строками).
+// Ключи свойств должны быть строками.
 // Значения могут быть любого типа.
 // Чтобы получить доступ к свойству, мы можем использовать:
 
@@ -275,7 +356,8 @@
 // Удаление свойства: delete obj.prop.
 // Проверка существования свойства: "key" in obj.
 // Перебор свойств объекта: цикл for for (let key in obj).
-// То, что мы изучали в этой главе, называется «простым объектом» («plain object») или просто Object.
+// То, что мы изучали в этой главе, называется 
+// «простым объектом» («plain object») или просто Object.
 
 // В JavaScript есть много других типов объектов:
 
@@ -433,14 +515,67 @@
 
 // let clone = {}; // новый пустой объект
 
-// давайте скопируем все свойства user в него
+// // давайте скопируем все свойства user в него
 // for (let key in user) { // name, age
 //   clone[key] = user[key];
+//   //1-clone.name = "John"
+//   //2-clone.age = 30
 // }
+// console.log(clone)
+// console.log(clone === user)
+
+
+
 // console.log(clone)
 // console.log(user)
 // // теперь clone это полностью независимый объект с тем же содержимым
 // console.log( user.name ); // все ещё John в первоначальном объекте
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+// START 11.02.2022
+
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -468,6 +603,11 @@
 // let test3 = { test3: '3' };
 // let test4 = { test4: '4' };
 // Object.assign(user, test, test2, test3, test4);
+
+// function psevdoAssing(targetObj, ...restObjects) {
+// 	// body...
+// }
+
 
 // console.log(user)
 
