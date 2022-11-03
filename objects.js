@@ -103,13 +103,13 @@
 //   age: 25
 // };
 // let userKey = "age";
-// console.log(user)
+// // console.log(user)
 
 // console.log( user[userKey] ); // Pete - и через переменную соотвественно
-// console.log(user)
-// user = { // а вот это уже вызовет ошибку
-//   age: 25
-// }
+// // console.log(user)
+// // user = { // а вот это уже вызовет ошибку
+// //   age: 25
+// // }
 
 
 
@@ -173,18 +173,19 @@
 // В реальном коде часто нам необходимо использовать существующие переменные 
 // как значения для свойств с тем же именем.
 
-// function makeUser(name, age) {//"John", 30
+// function makeUser(name, age = null, email = null) {//"John", 30
 //   return {
-//     name: name,//"John"
-//     age: age//30
+//     name,//"John"
+//     age: age ? age : null,
+//     email: email ? email : null,
 //   };
 // }
 
-// let user = makeUser("John", 30); // {name: "John", age: 30}
-// let user2 = makeUser("Alex", 45); // {name: "Alex", age: 45}
+// let user = makeUser("John", null, "nullra@gmail.com"); // {name: "John", age: 30}
+// let user2 = makeUser(); // {name: "Alex", age: 45}
 // let user3 = makeUser("Vlad", 31); // {name: "Vlad", age: 31}
 
-// console.log(user3);
+// console.log(user,user2,user3);
 
 // В примере выше название свойств name и age совпадают с названиями переменных, 
 // которые мы подставляем в качестве значений этих свойств. 
@@ -654,6 +655,17 @@
 //   }
 // };
 
+// let clone = Object.assign({}, user);
+
+// console.log( clone );
+
+// clone.sizes.height = 100;
+
+// console.log( clone );
+// console.log( user );
+
+
+
 // console.log( user.sizes.height ); // 182
 
 // Теперь недостаточно просто скопировать clone.sizes = user.sizes, 
@@ -704,7 +716,7 @@
 // Чтобы создать «реальную копию» (клон), 
 // мы можем использовать Object.assign для так называемой «поверхностной копии» 
 // (вложенные объекты копируются по ссылке) 
-// или функцию «глубокого клонирования», такую как _.cloneDeep(obj).
+// или функцию «глубокого клонирования», такую как _.cloneDeep(obj)(lodash).
 
 
 
@@ -729,9 +741,46 @@
 //   age: 30
 // };
 
-// let userKeysArray = Object.keys(user); [ ключ, ключ2, ключ3 ]
-// let userValuesArray = Object.values(user); [ значение, значение2, значение3 ]
-// let userEntriesArray = Object.entries(user);  [ [ключ, значение], [ключ2, значение2] ]
+// let userKeysArray = Object.keys(user); // [ "name", "age" ]
+// console.log(userKeysArray)
+
+// let userValuesArray = Object.values(user);  // [ "John", 30 ]
+// console.log(userValuesArray)
+
+// let userEntriesArray = Object.entries(user);  [ ["name", "John"], ["age", 30] ]
+// console.log(userEntriesArray)
+
+
+// let someObj = makeNewUser(userEntriesArray);
+// console.log(someObj);
+
+
+// function makeNewUser(userArr) { // получили массив из массивов которые содержат пары ключ - значение
+// 	let userObj = {}; // создали новый пустой объект
+
+// 	userArr.forEach( // итерируя исходный массив
+// 		function(item) {
+// 			const key = item[0];
+// 			const value = item[1];
+// 			if (key === 'age') {
+// 				userObj.firstAge = value;
+// 			} else {
+// 				userObj[key] = value; // заполняет пустой объект данными из массива
+// 			}
+			
+// 			//item - ["name", "John"] на первом цикле и ["age", 30] на втором цикле
+// 			//item[0] - "name" на первом цикле и "age" на втором цикле
+// 			//item[1] - "John" на первом цикле и 30 на втором цикле
+// 		}
+// 	)
+
+// 	return userObj
+
+// }
+
+
+
+
 
 // function entries(obj) {
 // 	let arr = [];
@@ -775,7 +824,7 @@
 //   age: 30
 // };
 
-// // перебор значений
+// // // перебор значений
 // for (let value of Object.values(user)) { // ["John", 30]
 //   console.log(value); // John, затем 30
 // }
@@ -835,11 +884,7 @@
 //   height: 200
 // };
 
-// let { 
-// 	title, 
-// 	width, 
-// 	height 
-// } = options;
+// let { height, title, width } = options;
 
 
 // console.log(title);  // Menu
@@ -855,14 +900,33 @@
 //   width: 100
 // };
 
+// let someObj = { ...options };
+// console.log(someObj)
+// someObj.height = 9999;
+// console.log(someObj)
+// console.log(options)
 // title = свойство с именем title
 // rest = объект с остальными свойствами
-// let { title, ...rest } = options;
+// let { 
+// 	title,
+// 	...restBlablabla 
+// } = options;
+
+
+// let title = options.title;
+// let restBlablabla = {};
+// for (let key in options) {
+// 	if (key !== 'title') {
+// 		restBlablabla[key] = options[key]
+// 	}
+// }
+
 
 // сейчас title="Menu", rest={height: 200, width: 100}
 // console.log(title);  // Menu
-// console.log(rest.height);  // 200
-// console.log(rest.width);   // 100
+// console.log(restBlablabla);
+// console.log(restBlablabla.height);  // 200
+// console.log(restBlablabla.width);   // 100
 
 
 
