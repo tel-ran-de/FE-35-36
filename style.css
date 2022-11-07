@@ -1,0 +1,56 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+.wrapper {
+	width: 80%;
+	margin: 0 auto;
+	display: flex;
+	justify-content: space-between;
+}
+.tabs {
+	width: 30%;
+}
+.informs {
+	width: 65%;
+}
+ul {
+	list-style: none;
+}
+li {
+	margin: 10px 0 0;
+	cursor: pointer;
+}
+.active {
+	color: red;
+	font-weight: bold;
+}
+.info {
+	display: none;
+}
+.is-show {
+	display: block;
+}
+
+
+
+
+
+
+
+.hidden-block {
+	display: none;
+}
+
+.show-btn {
+	background: #000;
+	border: 3px solid #000;
+	color: #fff;
+}
+
+.hide-btn {
+	background: #fff;
+	border: 3px solid #000;
+	color: #000;
+}
