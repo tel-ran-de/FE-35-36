@@ -3,6 +3,18 @@
 	padding: 0;
 	box-sizing: border-box;
 }
+body {
+	padding: 50px;
+}
+ul {
+	list-style: none;
+}
+li {
+	margin: 10px 0 0;
+	cursor: pointer;
+}
+
+
 .wrapper {
 	width: 80%;
 	margin: 0 auto;
@@ -14,13 +26,6 @@
 }
 .informs {
 	width: 65%;
-}
-ul {
-	list-style: none;
-}
-li {
-	margin: 10px 0 0;
-	cursor: pointer;
 }
 .active {
 	color: red;
@@ -36,11 +41,14 @@ li {
 
 
 
+.todo-list {
+	transition: opacity 0.5s;
+}
 
 
 
 .hidden-block {
-	display: none;
+	opacity: 0;
 }
 
 .show-btn {

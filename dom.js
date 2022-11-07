@@ -51,19 +51,16 @@
 // function getFullName(divider) {
 // 	return this.name + divider + this.surname;
 // }
-// let fullName = getFullName();
-// console.log(fullName) // undefined
-
 
 // как привязать к контексту?
 // console.log(getFullName) // просто инструкция
 // user.getFullName = getFullName;
-// console.log(user.getFullName) // просто инструкция
-// console.log(user) // обновленный объект с присвоенным методом (функцией)
+// user2.getFullName = getFullName;
+// // console.log(user) // обновленный объект с присвоенным методом (функцией)
 // let userFullName = user.getFullName(' ОГО '); // return this.name + ' ' + this.surname;
+// console.log(userFullName)
 
-
-
+// console.log(user2.getFullName(' aГa '))
 // user2.getFullName = getFullName;
 // let user2FullName = user2.getFullName(' и '); // return this.name + ' ' + this.surname;
 
@@ -80,10 +77,15 @@
 // user.name // 36
 
 
+// function someFunc(argument) {
+// 	// body...
+// }
 
 
+// arr.forEach(someFunc)
 
-// callback функции
+
+// // callback функции
 // function showMessage(sayFunction, name) {
 // 	sayFunction(name)
 // }
@@ -91,10 +93,13 @@
 // showMessage(sayHello, 'Илья');
 // showMessage(sayBye, 'Илья');
 // showMessage(sayHowAreYou, 'Илья');
-// showMessage(
-// 	function(name) {
-// 		console.log(`Hi, ${name}!`)
-// 	}, 'Гена');
+// showMessage(sayLoveYou, 'Илья');
+
+
+// // showMessage(
+// // 	function(name) {
+// // 		console.log(`Hi, ${name}!`)
+// // 	}, 'Гена');
 
 // function sayHello(name) {
 // 	console.log(`Hello, ${name}!`)
@@ -108,7 +113,9 @@
 // 	console.log(`How are you, ${name}?`)
 // }
 
-
+// function sayLoveYou(name) {
+// 	console.log(`I love you, ${name}!`)
+// }
 
 
 
@@ -142,6 +149,7 @@
 
 // console.log(document)
 // console.log(document.body.children)
+// console.log(document.body.style)
 // document.body.style.backgroundColor = "red";
 // console.log(document.body.style)
 // document.body.style.background = "red";
@@ -157,7 +165,7 @@
 
 
 // Методы поиска (получить элемент)
-// querySelector и querySelectorAll
+// querySelector и querySelectorAll // НУЖНО ЗАПОМНИТЬ
 // document.querySelectorAll(css) - возвращает все элементы по css селектору.
 
 
@@ -168,14 +176,12 @@
 // }
 
 
-
-
-
 // querySelector
 // elem.querySelector(css) возвращает первый элемент по css селектору.
 
-// let element = document.querySelector('.todo-list');
-// console.log(element.children[3].textContent)
+// let todoList = document.querySelector('.todo-list');
+
+// console.log(todoList.children[3].textContent)
 
 
 
@@ -184,18 +190,14 @@
 
 
 // Реакция на действия пользователя
-// let element = document.querySelector('.todo-list');
-// element.onclick = function(event) {
+// let todoList = document.querySelector('.todo-list');
+
+// todoList.onclick = function(event) {
 // 	console.log(this)
 // 	console.log(event.target)
 // };
 
-
 // this VS event.target
-
-
-
-
 
 
 
@@ -205,22 +207,25 @@
 // event.stopPropodation()
 
 
+
+
+// addEventListener и removeEventListener // НУЖНО ЗАПОМНИТЬ
 // element.addEventListener('eventName', functionName) - прослушка события
 
 // let todoList = document.querySelector('.todo-list');
 
-// todoList.addEventListener('click', showThisAndEventTarget)
-// todoList.addEventListener('click', showHello)
+// todoList.addEventListener('click', showThisAndEventTarget);
+// todoList.addEventListener('click', showHello);
 
 // function showThisAndEventTarget(event) {
-// 	console.log(this)
-// 	console.log(event.target)
-// }
+// 	console.log(this);
+// 	console.log(event.target);
+// };
 
 // function showHello(event) {
-// 	console.log('Hello')
-// 	todoList.removeEventListener('click', showHello)
-// }
+// 	console.log('Hello');
+// 	todoList.removeEventListener('click', showHello);
+// };
 
 
 // element.removeEventListener('eventName', functionName) - удаление прослушки события
@@ -234,37 +239,84 @@
 
 // element.classList.toggle('active'); // add, remove, toggle
 
+
+// Можно запомнить className (все классы элемента как строка)
+// Так же можно запомнить classList (все классы как массив)
+// И очень удобен classList.toggle('someClass') очень удобен
+// чтобы не мучится с флагами и доп.функции
+
+
+// function psevdoToggle(someClass) { // псевдо код
+// 	if (this.hasClass(someClass)) {
+// 		this.removeClass(someClass)
+// 	} else {
+// 		this.addClass(someClass)
+// 	}
+// }
+
+
+
 // let todoList = document.querySelector('.todo-list');
-// console.log(todoList.className);
+// console.log(todoList.classList[1]);
 // todoList.classList.toggle('active');
 // console.log(todoList.className);
 // todoList.classList.toggle('active');
 // console.log(todoList.className);
+
+
+
 
 
 // показать - спрятать
 // 1) Получаем все элементы и сохраняем их в переменные
 // let todoList = document.querySelector('.todo-list');
 // let showHideBtn = document.querySelector('.button-show-hide');
-// let testElement = document.querySelector('.test');
+// let testItem = document.querySelector('.test');
 
 // // 2) Прикрепляем прослушку событий
-// showHideBtn.addEventListener('click', showHideBlock);
-// showHideBtn.addEventListener('click', changeText);
+// showHideBtn.addEventListener('click', showHideBlock); // что делает эта функция callback? эта прячет и показывает блок
+// testItem.addEventListener('click', changeText); // это меняет текст например
 
 
 // // 3) Описали функции для событий
 // function showHideBlock(event) {
-// 	todoList.classList.toggle('hidden-block'); // если есть класс то
-// 	showHideBtn.classList.toggle('show-btn'); // удаляем его
-// 	showHideBtn.classList.toggle('hide-btn'); // если нет - добавляем
+// 	todoList.classList.toggle('hidden-block'); // скрыть-показать список
+
+// 	showHideBtn.classList.toggle('show-btn'); // изменить стиль кнопки
+// 	showHideBtn.classList.toggle('hide-btn'); // изменить стиль кнопки
 // }
 
 // function changeText(event) {
 // 	console.log('Смена текста');
-// 	testElement.textContent = 'Уже купили';
-// 	showHideBtn.removeEventListener('click', changeText);
+// 	testItem.textContent = 'Уже купили';
+// 	testItem.removeEventListener('click', changeText);
 // }
+
+
+
+
+
+
+
+
+
+
+
+// ПРОДОЛЖИМ ЗДЕСЬ
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 // show-btn
