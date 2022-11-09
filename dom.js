@@ -169,7 +169,7 @@
 // document.querySelectorAll(css) - возвращает все элементы по css селектору.
 
 
-// let elements = document.querySelectorAll('.todo-list li');
+// let elements = document.querySelectorAll('.todo-list li'); // возвращает массив
 // console.log(elements)
 // for (let elem of elements) {
 //   console.log(elem.textContent);
@@ -179,8 +179,9 @@
 // querySelector
 // elem.querySelector(css) возвращает первый элемент по css селектору.
 
-// let todoList = document.querySelector('.todo-list');
-
+// let todoList = document.querySelector('.todo-list'); // возвращает первый элемент по селектору
+// let firstLiOnPage = document.querySelector('.todo-list li');
+// подразумеваем, что элемент у нас на странице такой один
 // console.log(todoList.children[3].textContent)
 
 
@@ -237,7 +238,32 @@
 // classList – объект с методами add/remove/toggle/contains, 
 // удобно для управления отдельными классами.
 
+// let todoList = document.querySelector('.todo-list');
+// todoList.classList.add('blablabla');
+// console.log(todoList.classList.contains('blablabla'));
+// console.log(todoList.classList) // имеет blablabla
+// todoList.classList.remove('blablabla');
+// console.log(todoList.classList) // blablabla удален
+// console.log(todoList.classList.contains('blablabla'));
+
 // element.classList.toggle('active'); // add, remove, toggle
+
+// function validatorEmail(isValid, inputElement) {
+// 	if (isValid && inputElement.classList.contains('someChange')) {
+// 		inputElement.classList.add('greenGood')
+// 		inputElement.classList.remove('redError')
+// 	}
+
+// 	if (!isValid && inputElement.classList.contains('someChange')) {
+// 		inputElement.classList.remove('greenGood')
+// 		inputElement.classList.add('redError')
+// 	}
+// 	inputElement.classList.toggle('someChange');
+// }
+
+
+
+
 
 
 // Можно запомнить className (все классы элемента как строка)
@@ -293,31 +319,9 @@
 // }
 
 
-
-
-
-
-
-
-
-
-
-// ПРОДОЛЖИМ ЗДЕСЬ
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// 1) querySelector - поиск элемента
+// 2) addEventListener - прослушка
+// 3) Описание callback обработчика события
 
 // show-btn
 // hide-btn
@@ -327,19 +331,35 @@
 
 
 
-
+// ПРОДОЛЖИМ ЗДЕСЬ
 
 
 
 
 // Другие атрибуты:
 // element.getAttribute(attrName); // получить атрибут
+// getAttribute - можно запомнить
 
 // let link = document.querySelector('.link');
 // let linkHref = link.getAttribute('href');
-// console.log(linkHref)
+// console.log(linkHref);
+// console.log(link.textContent)
+// console.log(link.getAttribute('href'))
+// console.log(link.getAttribute('class'))
+// псевдокод
+// let aTag = {
+// 	href: "https://www.w3schools.com",
+// 	getAttribute: attrName => this[attrName]
+// } 
 
-// link.setAttribute('href', '#test');
+
+
+
+// let link = document.querySelector('.link');
+// link.setAttribute('href', '#test'); 
+
+// 1 аргумент какое свойство объекта
+// 2 каким значением заменить
 // console.log(link.getAttribute('href'))
 
 // element.getAttribute(attrName);
@@ -359,9 +379,19 @@
 // innerHTML и outerHTML
 
 // let todoList = document.querySelector('.todo-list');
+// console.log(todoList.children)
+
+// for (item of todoList.children) {
+// 	item.textContent = 'привет'
+// }
+
+
+
+
+// console.log(todoList.innerHTML)
+// console.log(todoList.textContent)
 // todoList.innerHTML = '<div>привет</div>'; // заменит вложенный в элемент html
 // todoList.outerHTML = '<div>привет</div>'; // элемент html и всё вложенное в него
-
 
 
 
@@ -384,19 +414,17 @@
 // 	} else {
 // 		importantInput.setAttribute('disabled', true);
 // 	}
-
+// }
 // аналогично
-// 	// if (importantInput.disabled) {
-// 	// 	importantInput.disabled = false
-// 	// } else {
-// 	// 	importantInput.disabled = true
-// 	// }
-
+	// if (importantInput.disabled) {
+	// 	importantInput.disabled = false
+	// } else {
+	// 	importantInput.disabled = true
+	// }
 // }
 
-
 // function resetInputValue(event) {
-// 	importantInput.value = '';
+// 	importantInput.value = 'sad';
 // }
 
 
@@ -415,20 +443,22 @@
 
 // tabs
 
-// let list = document.querySelector('.tabs ul');
-// const listElements = document.querySelectorAll('.tabs ul li');
-// const infos = document.querySelectorAll('.info');
+// let list = document.querySelector('.tabs ul'); // здесь сам элемент ul, содержащий cписок
+// const listElements = document.querySelectorAll('.tabs ul li'); // здесь массив <li>
+// const infos = document.querySelectorAll('.info'); // здесь массив divs c классом info
 
-
-// element.addEventListener('click', function(event) {
-// 	console.log(event.target.dataset)
-// 	showInfo(event.target.dataset.index)
+// list.addEventListener('click', function(event) {
+// 	console.log(event.target)
+// 	if (event.target.dataset.index) {
+// 		console.log(event.target.dataset.index)
+// 	}
+// 	// showInfo(event.target.dataset.index)
 // })
 
 // listElements.forEach((item, index) => {
 // 	item.addEventListener('click', (event) => {
-// 		console.log(index)
-// 		showInfo(event.target.dataset.index)
+// 		console.log(event.target.dataset.index) // data-что угодно...
+// 		// showInfo(event.target.dataset.index)
 // 	});
 // });
 
